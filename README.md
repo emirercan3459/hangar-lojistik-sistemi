@@ -86,6 +86,83 @@ Tablo Listesi:
 - logistics_hangarregion: Hangar içi genel bölge tanımlarını tutar.
 - logistics_systemactionlog: Sistem üzerindeki kritik eylemlerin iz kayıtlarını (audit log) tutar.
 
+## Varlık - İlişki (ER) Diyagramı
+
+```mermaid
+erDiagram
+    logistics_product ||--o{ logistics_stocktransaction : "FK_product_id"
+    logistics_product ||--o{ logistics_stockalert : "FK_product_id"
+    logistics_product ||--o{ logistics_shipment : "FK_product_id"
+    
+    logistics_hangarregion ||--o{ logistics_shelf : "FK_region_id"
+    logistics_shelf ||--o{ logistics_stocktransaction : "FK_shelf_id"
+    
+    logistics_personnel ||--o{ logistics_stocktransaction : "FK_personnel_id"
+    logistics_personnel ||--o{ logistics_shipment : "FK_driver_id"
+    
+    logistics_route ||--o{ logistics_shipment : "FK_route_id"
+    logistics_vehicle ||--o{ logistics_shipment : "FK_vehicle_id"
+
+    logistics_shipment ||--o{ logistics_shipmentlog : "shipment_id"
+
+    logistics_product {
+        int id PK
+        string name
+        string sku
+        int total_stock
+        int critical_stock_level
+    }
+    
+    logistics_hangarregion {
+        int id PK
+        string name
+    }
+    
+    logistics_shelf {
+        int id PK
+        string shelf_code
+        int region_id FK
+    }
+
+    logistics_personnel {
+        int id PK
+        string first_name
+        string last_name
+        string role
+    }
+
+    logistics_stocktransaction {
+        int id PK
+        string transaction_type
+        int quantity
+        int product_id FK
+        int personnel_id FK
+        int shelf_id FK
+    }
+
+    logistics_vehicle {
+        int id PK
+        string plate_number
+        numeric capacity_kg
+    }
+
+    logistics_route {
+        int id PK
+        string start_point
+        string end_point
+    }
+
+    logistics_shipment {
+        int id PK
+        string tracking_number
+        string status
+        int product_id FK
+        int route_id FK
+        int vehicle_id FK
+        int driver_id FK
+    }
+```
+
 # Ekran Görüntüleri
 
 ![Ekran Görüntüsü 1](docs/images/Screenshot_20260612_032248.png)
