@@ -33,7 +33,7 @@ const Logs = () => {
           <Activity size={24} style={{ marginRight: '10px', color: '#3b82f6', verticalAlign: 'middle' }} />
           Sistem Denetim İzi (Audit Trail)
         </h2>
-        <button className="primary-btn" onClick={fetchLogs}>🔄 Listeyi Yenile</button>
+        <button className="primary-btn" onClick={fetchLogs}>Listeyi Yenile</button>
       </div>
 
       <div className="content-section" style={{ backgroundColor: '#1e293b', border: 'none' }}>

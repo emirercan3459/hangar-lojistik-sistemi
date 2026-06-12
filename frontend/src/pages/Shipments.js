@@ -185,7 +185,7 @@ const Shipments = () => {
                         style={{ width: '30px', height: '30px', padding: '0', backgroundColor: '#fee2e2', border: '1px solid #fca5a5', borderRadius: '4px', cursor: 'pointer', color: '#dc2626', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700', fontSize: '12px' }}
                         title="Sevkiyatı Sil"
                       >
-                        ✕
+                        Kapat
                       </button>
                     </div>
                   </td>
@@ -213,10 +213,10 @@ const Shipments = () => {
               <div style={{ margin: '20px 0' }}>
                 <p style={{ fontSize: '14px', color: '#64748b' }}>Takip No: <strong>{weatherInfo.data.tracking_number}</strong></p>
                 <h2 style={{ fontSize: '36px', margin: '10px 0', color: '#0f172a' }}>{weatherInfo.data.temperature}°C</h2>
-                <p style={{ fontSize: '18px', fontWeight: 'bold', color: '#334155' }}>📍 {weatherInfo.data.destination}</p>
+                <p style={{ fontSize: '18px', fontWeight: 'bold', color: '#334155' }}>Hedef: {weatherInfo.data.destination}</p>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '10px', marginTop: '20px', padding: '15px', backgroundColor: '#f0f9ff', borderRadius: '8px', textAlign: 'left', fontSize: '14px' }}>
-                  <div><strong>💨 Rüzgar Hızı:</strong> {weatherInfo.data.windspeed} km/s</div>
-                  <div><strong>📊 Hava Durumu:</strong> Güncel Canlı Veri</div>
+                  <div><strong>Rüzgar Hızı:</strong> {weatherInfo.data.windspeed} km/s</div>
+                  <div><strong>Hava Durumu:</strong> Güncel Canlı Veri</div>
                 </div>
               </div>
             )}

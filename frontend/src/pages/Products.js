@@ -90,7 +90,7 @@ const Products = () => {
       <div className="page-header">
         <h2>Ürün ve Depo Envanteri</h2>
         <div>
-          <button className="primary-btn" style={{backgroundColor: '#10b981', marginRight: '10px', display: 'inline-flex', alignItems: 'center'}} onClick={exportToCSV}>
+          <button className="success-btn" onClick={exportToCSV}>
             <Download size={16} style={{marginRight: '6px'}} /> Excel (CSV) İndir
           </button>
           <button className="primary-btn" onClick={() => setShowForm(!showForm)}>
