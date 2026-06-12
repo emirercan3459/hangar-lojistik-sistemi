@@ -11,28 +11,22 @@ Hangar ortamlarındaki lojistik operasyonları, ürün stok süreçlerini, sevki
 - Harici API: Open-Meteo (Hava Durumu entegrasyonu için)
 
 # Kurulum Adımları
-Sistemi yerel ortamınızda çalıştırmak için aşağıdaki adımları sırasıyla uygulayabilirsiniz.
+Proje, tüm gereksinimleriyle birlikte kapsayıcı (container) mimarisi üzerinde çalışacak şekilde Docker ile yapılandırılmıştır. Kurulum için ekstra bir bağımlılık kurmanıza gerek kalmadan doğrudan Docker üzerinden projeyi çalıştırabilirsiniz.
 
-1. Veritabanı Oluşturma
-Sistem PostgreSQL veritabanı kullanmaktadır. Öncelikle veritabanını oluşturun:
-```sql
-CREATE DATABASE hangar_db;
-```
+1. Docker'ı Başlatın
+Sisteminizde Docker ve Docker Compose'un yüklü ve Docker Engine'in arka planda çalışır durumda olduğundan emin olun.
 
-2. Backend Gereksinimlerinin Yüklenmesi
-Sanal ortam oluşturarak gerekli Python paketlerini kurun:
+2. Projeyi Ayağa Kaldırma
+Proje kök dizininde (`docker-compose.yml` dosyasının bulunduğu yer) bir terminal açarak aşağıdaki komutu çalıştırın:
 ```bash
-python -m venv venv
-venv\Scripts\activate          # Windows için
-# source venv/bin/activate     # Linux/Mac için
-pip install fastapi uvicorn sqlalchemy psycopg2-binary requests pydantic
+docker compose up -d --build
 ```
+Bu komut, PostgreSQL veritabanını, Python/FastAPI backend servisini ve React frontend uygulamasını otomatik olarak yapılandırır, kurar ve birbirine bağlı şekilde başlatır.
 
-3. Çevre Değişkenleri (.env) Oluşturma
-Backend konfigürasyonlarını sağlayabilmek için proje dizininde bir `.env` dosyası oluşturun. Dosya içerisine veritabanı bağlantı cümlenizi ve gerekliyse diğer sabitleri aşağıdaki formata uygun şekilde ekleyin:
-```env
-DATABASE_URL=postgresql://kullanici_adiniz:sifreniz@localhost:5432/hangar_db
-```
+3. Uygulamaya Erişim
+Tüm servisler başarıyla başlatıldıktan sonra tarayıcınızdan uygulamalara erişebilirsiniz:
+- **Kullanıcı Arayüzü (Frontend):** [http://localhost:3000](http://localhost:3000)
+- **Backend API & Dokümantasyon:** [http://localhost:8000/docs](http://localhost:8000/docs)
 
 # API Endpointleri
 | Method | Endpoint | Açıklama |
