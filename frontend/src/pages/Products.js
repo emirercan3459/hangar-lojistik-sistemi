@@ -121,7 +121,7 @@ const Products = () => {
       {/* Stok Giriş/Çıkış Hızlı Aksiyon Modalı - Satıriçi */}
       {transactionModal.visible && (
         <div className="add-form" style={{backgroundColor: '#eff6ff', border: '1px solid #bfdbfe'}}>
-          <h3 style={{color: '#1e3a8a'}}>⚡ Hızlı Stok Aksiyonu - {transactionModal.productName}</h3>
+          <h3 style={{color: '#1e3a8a'}}>Hızlı Stok Aksiyonu - {transactionModal.productName}</h3>
           <form onSubmit={handleTransaction}>
             <div className="form-group">
               <label>İşlem Tipi:</label>
@@ -162,7 +162,7 @@ const Products = () => {
 
       {/* BARKOD GÖRÜNTÜLEME MODALI */}
       {barcodeModal.visible && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000}}>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000}}>
           <div style={{ background: 'white', padding: '30px', borderRadius: '10px', textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}>
             <h3>{barcodeModal.name}</h3>
             <p style={{color: '#64748b', fontSize: '12px', marginBottom: '20px'}}>Barkodu yazdırmak için sağ tıklayıp resmi kaydedebilirsiniz.</p>
