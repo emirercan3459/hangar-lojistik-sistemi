@@ -1,16 +1,43 @@
-# Proje Adı
-Hangar Lojistik Yönetim Sistemi
+<div align="center">
+  <h1>✈️ Hangar Lojistik Yönetim Sistemi</h1>
+  <p>Modern, Ölçeklenebilir ve Kapsamlı Lojistik Operasyon Merkezi</p>
 
-# Proje Amacı
-Hangar ortamlarındaki lojistik operasyonları, ürün stok süreçlerini, sevkiyat takiplerini ve personel yönetimini merkezi bir noktadan verimli bir şekilde yürütmek için geliştirilmiş tam yığın (full-stack) web uygulamasıdır.
+  ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+  ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+  ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+  ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+</div>
 
-# Kullanılan Teknolojiler
-- Backend: Python, FastAPI, SQLAlchemy
-- Veritabanı: PostgreSQL
-- Frontend: React, Axios
-- Harici API: Open-Meteo (Hava Durumu entegrasyonu için)
+---
 
-# Kurulum Adımları
+## 📖 Proje Amacı
+Hangar ortamlarındaki lojistik operasyonları, ürün stok süreçlerini, sevkiyat takiplerini ve personel yönetimini merkezi bir noktadan verimli bir şekilde yürütmek için geliştirilmiş kurumsal tam yığın (full-stack) web uygulamasıdır.
+
+## 📋 İçindekiler
+- [Kullanılan Teknolojiler](#-kullanılan-teknolojiler)
+- [Sistem Mimarisi](#-sistem-mimarisi)
+- [Kurulum Adımları](#-kurulum-adımları)
+- [Proje Dizini](#-proje-dizini)
+- [API Endpointleri](#-api-endpointleri)
+- [Veritabanı Yapısı](#-veritabanı-yapısı)
+- [Ekran Görüntüleri](#-ekran-görüntüleri)
+
+## 🛠 Kullanılan Teknolojiler
+- **Backend:** Python 3.10, FastAPI, SQLAlchemy, Pydantic
+- **Veritabanı:** PostgreSQL 14 (Otomatik Trigger & Fonksiyon destekli)
+- **Frontend:** React 19, Axios, Lucide-React
+- **Altyapı:** Docker & Docker Compose
+- **Harici API:** Open-Meteo (Gerçek zamanlı rota hava durumu)
+
+## 🏗 Sistem Mimarisi
+```mermaid
+graph LR
+    A[Kullanıcı Arayüzü<br>React] <-->|REST API / Axios| B(API Sunucusu<br>FastAPI)
+    B <-->|SQLAlchemy ORM| C[(Veritabanı<br>PostgreSQL)]
+    B -->|HTTP GET| D[Open-Meteo API<br>Hava Durumu]
+```
+
+## 🚀 Kurulum Adımları
 Proje, hem kapsayıcı (container) mimarisiyle Docker üzerinden hem de geleneksel yöntemlerle yerel ortamda kurulup çalıştırılabilir.
 
 ## Seçenek 1: Docker ile Hızlı Kurulum (Önerilen)
@@ -49,7 +76,27 @@ Tüm servisler başarıyla başlatıldıktan sonra tarayıcınızdan uygulamalar
 - **Kullanıcı Arayüzü (Frontend):** [http://localhost:3000](http://localhost:3000)
 - **Backend API & Dokümantasyon:** [http://localhost:8000/docs](http://localhost:8000/docs)
 
-# API Endpointleri
+## 📁 Proje Dizini
+```text
+hangar-lojistik-sistemi/
+├── backend/                  # FastAPI Sunucu Kodları
+│   ├── main.py               # Ana uygulama giriş noktası ve API rotaları
+│   ├── database.py           # PostgreSQL veritabanı bağlantısı
+│   ├── models/               # SQLAlchemy veritabanı tabloları
+│   ├── schemas.py            # Pydantic veri doğrulama şemaları
+│   ├── requirements.txt      # Python bağımlılıkları
+│   └── Dockerfile            # Backend konteyner yapılandırması
+├── frontend/                 # React Arayüz Kodları
+│   ├── src/                  # React bileşenleri ve sayfalar
+│   ├── public/               # Statik dosyalar (logolar vb.)
+│   ├── package.json          # Node.js bağımlılıkları
+│   └── Dockerfile            # Frontend konteyner yapılandırması
+├── docs/images/              # Proje ekran görüntüleri
+├── docker-compose.yml        # Çoklu konteyner orkestrasyonu
+└── hangar_lojistik_veritabani.sql # Veritabanı başlangıç şeması (Opsiyonel)
+```
+
+## 🔌 API Endpointleri
 | Method | Endpoint | Açıklama |
 |---|---|---|
 | GET/POST | `/api/products` | Ürün listeleme ve ekleme işlemleri |
