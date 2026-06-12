@@ -11,19 +11,40 @@ Hangar ortamlarındaki lojistik operasyonları, ürün stok süreçlerini, sevki
 - Harici API: Open-Meteo (Hava Durumu entegrasyonu için)
 
 # Kurulum Adımları
-Proje, tüm gereksinimleriyle birlikte kapsayıcı (container) mimarisi üzerinde çalışacak şekilde Docker ile yapılandırılmıştır. Kurulum için ekstra bir bağımlılık kurmanıza gerek kalmadan doğrudan Docker üzerinden projeyi çalıştırabilirsiniz.
+Proje, hem kapsayıcı (container) mimarisiyle Docker üzerinden hem de geleneksel yöntemlerle yerel ortamda kurulup çalıştırılabilir.
 
-1. Docker'ı Başlatın
-Sisteminizde Docker ve Docker Compose'un yüklü ve Docker Engine'in arka planda çalışır durumda olduğundan emin olun.
+## Seçenek 1: Docker ile Hızlı Kurulum (Önerilen)
+Sisteminizde Docker kurulu ise başka bir şeye ihtiyacınız yoktur.
 
-2. Projeyi Ayağa Kaldırma
-Proje kök dizininde (`docker-compose.yml` dosyasının bulunduğu yer) bir terminal açarak aşağıdaki komutu çalıştırın:
+1. Proje kök dizininde bir terminal açarak aşağıdaki komutu çalıştırın:
 ```bash
 docker compose up -d --build
 ```
-Bu komut, PostgreSQL veritabanını, Python/FastAPI backend servisini ve React frontend uygulamasını otomatik olarak yapılandırır, kurar ve birbirine bağlı şekilde başlatır.
+Bu komut, PostgreSQL veritabanını, Python/FastAPI backend servisini ve React frontend uygulamasını otomatik olarak yapılandırır ve birbirine bağlı şekilde başlatır.
 
-3. Uygulamaya Erişim
+## Seçenek 2: Manuel (Docker'sız) Kurulum
+
+1. **Veritabanı Kurulumu:** Sisteminizde PostgreSQL kurulu olmalıdır. `hangar_db` adında yeni bir veritabanı oluşturun.
+2. **Çevre Değişkenleri:** Proje kök dizininde bir `.env` dosyası oluşturup veritabanı bağlantı cümlenizi girin:
+```env
+DATABASE_URL=postgresql://kullanici_adiniz:sifreniz@localhost:5432/hangar_db
+```
+3. **Backend Kurulumu:** `backend` klasörüne girip sanal ortam oluşturun ve servisi başlatın:
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate     # Windows için: venv\Scripts\activate
+pip install -r requirements.txt
+python -m uvicorn main:app --reload --port 8000
+```
+4. **Frontend Kurulumu:** Yeni bir terminal açıp `frontend` klasörüne girin ve React uygulamasını başlatın:
+```bash
+cd frontend
+npm install
+npm start
+```
+
+## Uygulamaya Erişim
 Tüm servisler başarıyla başlatıldıktan sonra tarayıcınızdan uygulamalara erişebilirsiniz:
 - **Kullanıcı Arayüzü (Frontend):** [http://localhost:3000](http://localhost:3000)
 - **Backend API & Dokümantasyon:** [http://localhost:8000/docs](http://localhost:8000/docs)
