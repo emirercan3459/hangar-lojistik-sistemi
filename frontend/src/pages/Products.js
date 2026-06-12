@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Barcode from 'react-barcode';
-import { ScanBarcode } from 'lucide-react';
+import { ScanBarcode, Download } from 'lucide-react';
 import './Products.css';
 
 const API_URL = 'http://localhost:8000/api';
@@ -90,8 +90,8 @@ const Products = () => {
       <div className="page-header">
         <h2>Ürün ve Depo Envanteri</h2>
         <div>
-          <button className="primary-btn" style={{backgroundColor: '#10b981', marginRight: '10px'}} onClick={exportToCSV}>
-            📥 Excel (CSV) İndir
+          <button className="primary-btn" style={{backgroundColor: '#10b981', marginRight: '10px', display: 'inline-flex', alignItems: 'center'}} onClick={exportToCSV}>
+            <Download size={16} style={{marginRight: '6px'}} /> Excel (CSV) İndir
           </button>
           <button className="primary-btn" onClick={() => setShowForm(!showForm)}>
             {showForm ? 'Vazgeç' : '+ Yeni Ürün Tanımla'}

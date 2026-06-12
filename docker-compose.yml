@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: hangar_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hangar_db
+    ports:
+      - "5432:5432"
+    volumes:
+      # Veritabanı şemasını ve trigger'ları otomatik başlatmak için
+      - ./hangar_lojistik_veritabani.sql:/docker-entrypoint-initdb.d/init.sql
+      # Verilerin kalıcı olması için volume
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: hangar_backend
+    environment:
+      # db servisine bağlanacak
+      - DATABASE_URL=postgresql://postgres:password@db:5432/hangar_db
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: hangar_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - WDS_SOCKET_PORT=0
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  pgdata:
