@@ -34,7 +34,7 @@ Hangar ortamlarındaki lojistik operasyonları, ürün stok süreçlerini, sevki
 graph LR
     A[Kullanıcı Arayüzü<br>React] <-->|REST API / Axios| B(API Sunucusu<br>FastAPI)
     B <-->|SQLAlchemy ORM| C[(Veritabanı<br>PostgreSQL)]
-    B -->|HTTP GET/PUT/POST/DELETE| D[Open-Meteo API<br>Hava Durumu]
+    B -->|HTTP| D[Open-Meteo API<br>Hava Durumu]
 ```
 
 ## 🚀 Kurulum Adımları
